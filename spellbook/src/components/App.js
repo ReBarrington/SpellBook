@@ -1,26 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import OpenBook from './OpenBook';
 import ClosedBook from './ClosedBook';
 
 function App() {
-
-    let closed = true;
+  let [closed, setClosed] = useState(true)
 
     const isOpening = () => {
-        closed = false;
+        setClosed(closed => !closed);
         console.log(closed)
     }
 
-    if (closed === true) {
-      return (
-          <div className="closed-book" onClick={isOpening}>
-              <ClosedBook />
-          </div>
-        );
-    } else if (closed === false) {
-      return <OpenBook />
-    }
-
+    return (
+      <div onClick={isOpening}>
+        {closed ? <ClosedBook /> : <OpenBook />}
+      </div>
+    )
 }
 
 export default App;
